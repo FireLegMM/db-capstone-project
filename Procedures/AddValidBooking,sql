@@ -12,6 +12,7 @@ START TRANSACTION;
     INSERT INTO Bookings (TableNum, `date`)
     VALUES (NewTableID, bookingdate);
     COMMIT;
+    SELECT 'Booking added successfully'
 END IF;
 END$
 DELIMITER ;
