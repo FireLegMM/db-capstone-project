@@ -1,0 +1,10 @@
+DELIMITER $
+CREATE PROCEDURE UpdateBooking(in NewBookingID int, bookingdate date)
+BEGIN
+update Bookings
+
+	set bookings.`date` = bookingdate 
+
+	where BookingID = NewBookingID;
+END$
+DELIMITER ;

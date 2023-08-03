@@ -1,0 +1,17 @@
+DELIMITER $
+CREATE PROCEDURE AddValidBooking (in bookingdate date, NewTableID int)
+BEGIN
+SET @NewCustomerID = 1;
+IF (SELECT COUNT(*) FROM Bookings
+    WHERE Bookings.`date` = bookingdate AND Bookings.TableNum = NewTableID) > 0
+THEN
+    SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Booking already exists';
+ELSE
+START TRANSACTION;
+    INSERT INTO Bookings (TableNum, `date`)
+    VALUES (NewTableID, bookingdate);
+    COMMIT;
+END IF;
+END$
+DELIMITER ;
